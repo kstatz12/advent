@@ -1,5 +1,7 @@
 pub mod reader;
 pub mod one;
-fn main(){
+fn main() {
+    let x = one::run();
+    println!("{}", x);
 }
 

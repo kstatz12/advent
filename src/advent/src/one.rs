@@ -1,6 +1,21 @@
-use crate::reader::*;
+//use crate::reader::*;
+use std::{
+    fs::File,
+    io::{BufRead, BufReader},
+};
 
-pub fn run() {
+pub fn run() -> i32 {
+    let filename = "src/input/one_input.txt";
+    let file = File::open(filename).unwrap();
+    let reader = BufReader::new(file);
+    let mut inputs : Vec<i32> = Vec::new();
+
+    for (index, line) in reader.lines().enumerate() {
+        let line = line.unwrap();
+        let i = line.parse::<i32>().unwrap();
+        inputs.push(i);
+    }
+    sum(inputs)
 }
 
 fn calc(mass : i32) -> i32 {
@@ -8,15 +23,12 @@ fn calc(mass : i32) -> i32 {
     f as i32 - 2
 }
 
-fn get_lines(file_path: String) -> Vec<String>{
-    let reader = BufReader::open(file_path);
-    let mut buffer = String::new();
-    let mut vect : std::vec::Vec<std::string::String> = Vec::new();
-
-    while let Some(line) = reader.read_line(&mut buffer) {
-        vect.push(line.unwrap().to_string());
+fn sum(inputs : Vec<i32>) -> i32 {
+    let mut total : i32 = 0;
+    for i in inputs.iter(){
+        let r = calc(*i);
+        total += r;
     }
-    vect
+    total
 }
-
 
