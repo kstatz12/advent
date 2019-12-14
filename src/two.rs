@@ -23,7 +23,8 @@ fn solve(start_idx : usize, vect : &mut Vec<i32>) -> Vec<i32> {
     let r = match opcode {
         1 => add(left, right, vect),
         2 => multiply(left, right, vect),
-        _ => -1,
+        99 => -1,
+        _ => -2,
     };
 
     if r == -1 {

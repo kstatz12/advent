@@ -4,15 +4,15 @@ pub fn calculate_fuel(mass : i32) -> i32 {
 }
 
 pub fn add(lhs : usize, rhs : usize, vect : &Vec<i32>) -> i32 {
-    let lhs_val = vect[lhs];
-    let rhs_val = vect[rhs];
-    lhs_val + rhs_val 
+    let lhs_val = vect[lhs] as usize;
+    let rhs_val = vect[rhs] as usize;
+    vect[lhs_val] + vect[rhs_val]
 }
 
 pub fn multiply(lhs : usize, rhs : usize, vect: &Vec<i32>) -> i32{
-    let lhs_val = vect[lhs];
-    let rhs_val = vect[rhs];
-    lhs_val * rhs_val 
+    let lhs_val = vect[lhs] as usize;
+    let rhs_val = vect[rhs] as usize;
+    vect[lhs_val] * vect[rhs_val]
 }
 
 
