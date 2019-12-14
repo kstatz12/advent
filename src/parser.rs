@@ -16,9 +16,17 @@ pub fn get_ints(filename : &'static str) -> Vec<i32> {
     inputs
 }
 
-pub fn get_two_input(filename : &'static str) -> mut& Vec<i32> {
+pub fn get_two_input(filename : &'static str) -> Vec<i32> {
     let file = File::open(filename).unwrap();
-    let reader = BufReader::new(file);
-    let 
+    let mut reader = BufReader::new(file);
+    let mut buffer = String::new();
+
+    let _ = reader.read_line(&mut buffer);
+
+    buffer.trim()
+        .split(',')
+        .into_iter()
+        .map(|x| x.parse::<i32>().unwrap())
+        .collect()
 }
 

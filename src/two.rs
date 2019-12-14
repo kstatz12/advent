@@ -1,40 +1,40 @@
 use crate::{
-    parser::*,
+    parser::get_two_input,
     calc::*,
 };
 
-pub fun run() {
-    
+pub fn run() -> i32 {
+    let mut inputs = get_two_input("src/input/two_input.txt");
+    //as per directions
+    inputs[1] = 12;
+    inputs[2] = 2;
+    let r = solve(0, &mut inputs);
+    r[0]
 }
 
 
-pub fn solve(slice : &[i32], vect : mut& Vec<i32>) -> Vec<i32> {
-    let opcode = slice[0];
+fn solve(start_idx : usize, vect : &mut Vec<i32>) -> Vec<i32> {
+    let opcode = vect[start_idx];
+
+    let left : usize = start_idx + 1;
+    let right : usize = start_idx + 2;
+    let output : usize = start_idx + 3;
 
     let r = match opcode {
-        1 => add(slice[1], slice[2], vect),
-        2 => multiply(slice[1], slice[2], vect),
+        1 => add(left, right, vect),
+        2 => multiply(left, right, vect),
         _ => -1,
-    }
+    };
 
     if r == -1 {
-        vect
+        vect.to_vec()
     }
     else {
-        let output_pos = slice[3];
+        let output_pos = vect[output] as usize;
         vect[output_pos] = r;
-        vect
+        solve(start_idx + 4, vect)
     }
 }
 
-fn add(lhs : i32, rhs : i32, vect : mut& Vec<i32>) -> i32 {
-    let lhsVal = vect[lhs];
-    let rhsVal = vect[rhs];
-    lhsVal + rhsVal 
-}
 
-fn multiply(lhs : i32, rhs : i32, vect: mut& Vec<i32>) -> i32 {
-    let lhsVal = vect[lhs];
-    let rhsVal = vect[rhs];
-    lhsVal * rhsVal 
-}
+
