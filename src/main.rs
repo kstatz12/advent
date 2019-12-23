@@ -3,12 +3,9 @@ pub mod parser;
 pub mod one;
 pub mod onep2;
 pub mod two;
+pub mod twop2;
+pub mod computer;
 fn main() {
-    //let x = one::run();
-    //println!("{}", x);
-    //let x2 = onep2::run();
-    //println!("{}", x2);
-    let two = two::run();
-    println!("{}", two);
+    println!("tuple of tuples: {:?}", twop2::run());
 }
 
