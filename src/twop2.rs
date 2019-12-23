@@ -6,20 +6,19 @@ use crate::{
 
 use std::convert::TryInto;
 
-pub fn run() {
-    let mut inputs = get_two_input("src/input/two_input.txt");
+pub fn run() -> i32 {
+    let mut res = 0;
     for lhs in 0..99 {
         for rhs  in 0..99{
-            if lhs <= inputs.len() && rhs <= inputs.len() {
+                let mut inputs = get_two_input("src/input/two_input.txt");
                 inputs[1] = lhs.try_into().unwrap();
                 inputs[2] = rhs.try_into().unwrap();
 
                 let r = solve(0, &mut inputs);
                 if r[0] == 19690720 {
-                    println!("{}, {}", lhs, rhs);
+                    res = 100 * lhs + rhs;
                 }
-    
-            }
         }
     }
+    res
 }
